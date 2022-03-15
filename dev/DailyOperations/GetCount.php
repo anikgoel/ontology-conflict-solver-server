@@ -8,9 +8,9 @@ require_once '../../includes/DataBaseOperations.php';
 			$expertId = $_POST["expertId"];
 	        $db = new DataBaseOperations();
 
-	        $result = $db->countUnsolvedConflictsByExpert($expertId);
+	        $result = $db->countCompletedConflictsByExpert($expertId);
             
-            $count = $result['COUNT(conflictId)'];
+            $count = $result['COUNT(termId)'];
             $unsolvedData = array("count"=>$count);
 
 	        echo json_encode($unsolvedData);		                 
