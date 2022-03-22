@@ -1417,5 +1417,40 @@
             $stmt->bind_param("issssss", $termId, $iri, $elucidations, $sentences, $definition, $label, $termCreator);
             $stmt->execute();
         }
+
+        public function getDisputedDeprecations(){
+            $stmt = $this->con->prepare("
+                SELECT DISTINCT 
+                confusingterm.termId as termId,
+                confusingterm.term as term,
+                confusingterm.data as data,
+                confusingterm.status as status,
+                disputedsolution.expertID,
+                sentence.sentence
+            FROM confusingterm
+            LEFT JOIN disputedsolution ON confusingterm.termID = disputedsolution.termID
+            LEFT JOIN sentence ON confusingterm.termID = sentence.termID
+            WHERE confusingterm.type='disputedDeprecation'                    
+            ORDER BY term ASC
+            ;");
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+
+        public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment){
+            $stmt = $this->con->prepare("
+                INSERT INTO `disputedsolution` 
+                (id, createdAt, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment) 
+                VALUES
+                (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ? );
+            ");
+            $stmt->bind_param('iissssss',$expertId, $termId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment);
+
+            if($stmt->execute()){
+                return 1;
+            }
+            return 2;
+        }
+
     }
 ?>

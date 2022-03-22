@@ -6,8 +6,11 @@ require_once '../../includes/DataBaseOperations.php';
         $db = new DataBaseOperations();
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://shark.sbs.arizona.edu:8080/carex/getClassesWMSuperclasses");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+
+        curl_setopt($ch, CURLOPT_URL, "http://shark.sbs.arizona.edu:8080/carex/getClassesWMSuperclasses");
+        
         // echo(curl_exec($ch));
 
         $categoryTasksResponse = curl_exec($ch);
@@ -330,6 +333,22 @@ require_once '../../includes/DataBaseOperations.php';
                     }
                 }
             }            
+        }
+
+
+
+/**
+ * Disputed Deprecations fetching into the database
+ */
+        curl_setopt($ch, CURLOPT_URL, "http://shark.sbs.arizona.edu:8080/dispute/all");
+        $disputedResponse = curl_exec($ch);
+        $disputedDeprecations = json_decode($disputedResponse);
+        foreach($disputedDeprecations as $deprecation){
+            $authorId = $db->getAuthorId($deprecation->{'disputed_by'});
+            $termId = $db->insertTermToConfusing($deprecation->{'iri'}, $deprecation->{'label'}, $deprecation->{'disputed_reason'}, 'disputedDeprecation', $authorId);
+            if ($termId != "Exist" && isset($deprecation->{'deprecated_reason'})) {
+                $db->insertSentence($deprecation->{'deprecated_reason'}, $termId);
+            }
         }
 
         curl_close($ch);
