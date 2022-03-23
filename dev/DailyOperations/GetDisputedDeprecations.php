@@ -15,7 +15,7 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
     $disputedDeprecations[$task['termId']]['disputedReason'] = $task['data'];
     $disputedDeprecations[$task['termId']]['status'] = $task['status'];
     $disputedDeprecations[$task['termId']]['deprecatedReason'] = $task['sentence'];
-    if(is_array($task['expertID'])){
+    if($task['expertID'] !== NULL){
         $disputedDeprecations[$task['termId']]['expertSolutions'][] = $task['expertID'];
     }else{
         $disputedDeprecations[$task['termId']]['expertSolutions'] = [];
