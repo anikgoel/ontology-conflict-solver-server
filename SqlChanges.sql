@@ -18,3 +18,6 @@ ADD `type` tinyint NOT NULL DEFAULT '1' COMMENT '1-quality, 2-structure' AFTER `
 
 ALTER TABLE `disputedsolution`
 ADD `newOrExisting` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1-new, 2-existing' AFTER `type`;
+
+ALTER TABLE `confusingterm`
+ADD `createdAt` datetime NULL;

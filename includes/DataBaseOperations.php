@@ -1110,7 +1110,7 @@
 
         public function insertTermToConfusing($iri, $term, $data, $type, $authorId) {
             if(!$this->isTermExist($iri, $type)) {
-                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`,`IRI`,`term`,`data`,`type`,`authorId`) VALUES (NULL, ?, ?, ?, ?, ?);");
+                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`, `createdAt`, `IRI`,`term`,`data`,`type`,`authorId`) VALUES (NULL,'".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?);");
                 $stmt->bind_param("ssssi", $iri, $term, $data, $type, $authorId);
                 $stmt->execute();
                 $term = $this->getConfusingTermByIRI($iri, $type);
@@ -1121,7 +1121,7 @@
 
         public function insertEquivTermToConfusing($iri, $term, $data, $type, $authorId, $elucidations, $sentences, $definition) {
             if(!$this->isTermExist($iri, $type)) {
-                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`,`IRI`,`term`,`data`,`type`,`authorId`, `elucidations`, `sentences`, `definition`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);");
+                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`, `createdAt`,`IRI`,`term`,`data`,`type`,`authorId`, `elucidations`, `sentences`, `definition`) VALUES (NULL,'".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ?);");
                 $stmt->bind_param("ssssisss", $iri, $term, $data, $type, $authorId, $elucidations, $sentences, $definition);
                 $stmt->execute();
                 $term = $this->getConfusingTermByIRI($iri, $type);
