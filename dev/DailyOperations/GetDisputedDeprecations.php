@@ -3,7 +3,7 @@ require_once '../../includes/DataBaseOperations.php';
 
 $disputedDeprecations = [];
 
-echo "<pre>";
+// echo "<pre>";
 $db = new DataBaseOperations();
 // print_r($db);
 $disputedDeprecationsDb = $db->getDisputedDeprecations();
