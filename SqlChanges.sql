@@ -15,3 +15,6 @@ CREATE TABLE `disputedsolution` (
 
 ALTER TABLE `disputedsolution`
 ADD `type` tinyint NOT NULL DEFAULT '1' COMMENT '1-quality, 2-structure' AFTER `comment`;
+
+ALTER TABLE `disputedsolution`
+ADD `newOrExisting` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1-new, 2-existing' AFTER `type`;
