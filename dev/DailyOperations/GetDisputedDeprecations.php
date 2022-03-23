@@ -18,7 +18,7 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
     if(is_array($task['expertID'])){
         $disputedDeprecations[$task['termId']]['expertSolutions'][] = $task['expertID'];
     }else{
-        $disputedDeprecations[$task['termId']]['expertSolutions'] = $task['expertID'];
+        $disputedDeprecations[$task['termId']]['expertSolutions'] = [];
     }
     
     $disputedDeprecations[$task['termId']]['disputedBy'] = $task['firstname'];
