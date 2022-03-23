@@ -24,3 +24,6 @@ ADD `createdAt` datetime NULL;
 
 ALTER TABLE `addtermsolution`
 ADD `createdAt` datetime NULL ON UPDATE CURRENT_TIMESTAMP;
+
+ALTER TABLE `addtermsynonyms`
+ADD `createdAt` datetime NULL ON UPDATE CURRENT_TIMESTAMP;

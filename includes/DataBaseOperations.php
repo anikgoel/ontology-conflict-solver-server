@@ -721,7 +721,7 @@
             for ($i = 0; $i < count($experts); $i ++) {
                 $stmt = $this->con->prepare("
                     INSERT INTO addtermsynonyms
-                    VALUES( NULL, ?, ?, ?);
+                    VALUES( NULL, ?, ?, ?, '".date("Y-m-d H:i:s")."');
                 ;");
                 $stmt->bind_param("sss", $termId, $experts[$i], $synonyms[$i]);
                 if (!$stmt->execute()) {
