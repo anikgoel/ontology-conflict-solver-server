@@ -2486,6 +2486,178 @@ require_once '../../includes/DataBaseOperations.php';
                         $db->markTermSolved($termId);
                     }
                 }
+            }else if ($type == 'disputedDeprecation') {
+                $countSolved = $db->countSolvedDisputedConflicts($termId);
+                $count      = $countSolved['COUNT(expertId)'];
+                $termSolved = 0;
+                if ($count > 1) {
+                        $resDisputedSolutions = $db->getDisputedSolutionByTermId($termId);
+                        $addTermSolutions = array();
+                        $newCount = 0;
+                        $existingCount = 0;
+                        $strongType = "";
+
+                        while ($rowAddTermSolution = $resAddTermSolutions->fetch_assoc() ) {
+                            $addTermSolutions[] = $rowAddTermSolution;
+
+                            if ($rowAddTermSolution['newOrExisting'] == 1) {
+                                $newCount ++;
+                            } else {
+                                $existingCount ++;
+                            }
+                        }
+                        
+                        if ($newCount / $count >= 0.6) {
+                            echo("Strong agreement on new<br/>");
+
+                            foreach($addTermSolutions as $solution){
+                                if ($rowAddTermSolution['newOrExisting'] == 1) {
+                                    $decisionExperts .= "[".$solution['username']."]";
+                                }
+                            }
+
+                            /** First API call */
+
+                            $ch = curl_init();
+                            $url = "http://shark.sbs.arizona.edu:8080/class";
+                            $fileds = array(
+                                "user" => "",
+                                "ontology" => "carex",
+                                "term" => $term, 
+                                "superclassIRI" => "http://url/of/the#category", 
+                                "definition" => "definition provided, can add multiple definitions by repeating definition key", 
+                                "elucidation" => "", 
+                                "createdBy" => "Conflict Resolver dispute process, new term added by " . $decisionExperts, 
+                                "creationDate" => $currentDate, 
+                                "definitionSrc" => $decisionExperts, 
+                                "examples" => "example provided. used in taxon [taxa provided]", 
+                                "logicDefinition" => "" 
+
+                            );
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                            $result = curl_exec($ch);
+                            echo ($result);
+                            echo ("<br/>");
+                            curl_close($ch);
+
+                            /** Second API call */
+
+                            $ch = curl_init();
+                            $url = "http://shark.sbs.arizona.edu:8080/nrsynonym";
+                            $fileds = array(
+                                "user"=>"",
+                                "ontology"=>"carex", 
+                                "term"=>$term, 
+                                "classIRI"=> "http://biosemantics.arizona.edu/ontologies/carex#newterm", 
+                                "decisionExperts"=>$decisionExperts, 
+                                "decisionDate"=> $currentDate 
+                            );
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                            $result = curl_exec($ch);
+                            echo ($result);
+                            echo ("<br/>");
+                            curl_close($ch);
+
+                            /** Third API call */
+
+                            $ch = curl_init();
+                            $url = "http://shark.sbs.arizona.edu:8080/addReplacementTerms";
+                            $fileds = array(
+                                "user"=>"",
+                                "ontology"=>"carex", 
+                                "replaceTerms"=> "[“IRI of the newterm/suggestedterm”]", 
+                                "depClassIRI"=> $termIRI, 
+                                "decisionExperts"=> $decisionExperts, 
+                                "decisionDate"=> $currentDate
+
+                            );
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                            $result = curl_exec($ch);
+                            echo ($result);
+                            echo ("<br/>");
+                            curl_close($ch);
+
+                            $db->markTermSolved($termId);
+                           
+                            
+                        } else if ($existingCount / $count >= 0.6) {
+                            echo("Strong agreement on existing<br/>");
+
+                            foreach($addTermSolutions as $solution){
+                                if ($rowAddTermSolution['newOrExisting'] == 2) {
+                                    $decisionExperts .= "[".$solution['username']."]";
+                                }
+                            }
+
+                            /** First API Call */
+
+                            $ch = curl_init();
+                            $url = "http://shark.sbs.arizona.edu:8080/nrsynonym";
+                            $fileds = array(
+                                "user"=>"",
+                                "ontology"=>"carex", 
+                                "term"=>$term, 
+                                "classIRI"=> "http://biosemantics.arizona.edu/ontologies/carex#suggestedterm", 
+                                "decisionExperts"=>$decisionExperts, 
+                                "decisionDate"=> $currentDate 
+                            );
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                            $result = curl_exec($ch);
+                            echo ($result);
+                            echo ("<br/>");
+                            curl_close($ch);
+
+                            /** Second API call */
+
+                            $ch = curl_init();
+                            $url = "http://shark.sbs.arizona.edu:8080/addReplacementTerms";
+                            $fileds = array(
+                                "user"=>"",
+                                "ontology"=>"carex", 
+                                "replaceTerms"=> "[“IRI of the newterm/suggestedterm”]", 
+                                "depClassIRI"=> $termIRI, 
+                                "decisionExperts"=> $decisionExperts, 
+                                "decisionDate"=> $currentDate
+
+                            );
+                            curl_setopt($ch, CURLOPT_URL, $url);
+                            curl_setopt($ch, CURLOPT_POST, true);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                            $result = curl_exec($ch);
+                            echo ($result);
+                            echo ("<br/>");
+                            curl_close($ch);
+
+                            $db->markTermSolved($termId);
+                        } else {
+                            echo("no strong agreement, mark this term bold<br/>");
+                            $db->markTermTough($termId);
+                        }
+                        
+
+                    
+                } else if ($countDeclined['COUNT(expertId)'] == 1) {
+                    echo ("only 1 decision. mark this term as bold<br/>");
+                    $db->markTermTough($termId);
+                }
             }
         }
     }
