@@ -21,3 +21,6 @@ ADD `newOrExisting` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1-new, 2-existing' 
 
 ALTER TABLE `confusingterm`
 ADD `createdAt` datetime NULL;
+
+ALTER TABLE `addtermsolution`
+ADD `createdAt` datetime NULL ON UPDATE CURRENT_TIMESTAMP;

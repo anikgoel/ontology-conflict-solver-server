@@ -667,7 +667,7 @@
 
             $stmt = $this->con->prepare("
                 INSERT INTO addtermsolution
-                VALUES( NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                VALUES( NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '".date("Y-m-d H:i:s")."');
             ;");
             $stmt->bind_param("ssssssssss", $termId, $expertId, $termType, $subpart, $superpart, $alwaysHasPart, $alwaysPartOf, $maybePartOf, $subclassOf, $comment);
             return $stmt->execute();
