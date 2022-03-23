@@ -913,6 +913,7 @@
             $stmt = $this->con->prepare("
                 SELECT *
                 FROM disputedsolution
+                LEFT JOIN expert ON disputedsolution.expertID = expert.expertId
                 WHERE termId = ?
             ");
             $stmt->bind_param("i", $termId);
@@ -1463,14 +1464,14 @@
             return $stmt->get_result();
         }
 
-        public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type){
+        public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type, $newOrExisting){
             $stmt = $this->con->prepare("
                 INSERT INTO `disputedsolution` 
-                (id, createdAt, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment, type) 
+                (id, createdAt, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment, type, newOrExisting) 
                 VALUES
-                (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ? );
+                (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
             ");
-            $stmt->bind_param('iissssss',$expertId, $termId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type);
+            $stmt->bind_param('iissssssii',$expertId, $termId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type, $newOrExisting);
 
             if($stmt->execute()){
                 return 1;
