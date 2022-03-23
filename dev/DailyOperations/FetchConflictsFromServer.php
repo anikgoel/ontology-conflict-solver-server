@@ -8,7 +8,7 @@ require_once '../../includes/DataBaseOperations.php';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         
-
+/*
         curl_setopt($ch, CURLOPT_URL, "http://shark.sbs.arizona.edu:8080/carex/getClassesWMSuperclasses");
         
         // echo(curl_exec($ch));
@@ -335,7 +335,7 @@ require_once '../../includes/DataBaseOperations.php';
             }            
         }
 
-
+*/
 
 /**
  * Disputed Deprecations fetching into the database
@@ -348,6 +348,7 @@ require_once '../../includes/DataBaseOperations.php';
             $termId = $db->insertTermToConfusing($deprecation->{'iri'}, $deprecation->{'label'}, $deprecation->{'disputed_reason'}, 'disputedDeprecation', $authorId);
             if ($termId != "Exist" && isset($deprecation->{'deprecated_reason'})) {
                 $db->insertSentence($deprecation->{'deprecated_reason'}, $termId);
+                $db->insertDefinition($deprecation->{'new_definition'}, $termId);
             }
         }
 

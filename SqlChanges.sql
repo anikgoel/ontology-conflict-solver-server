@@ -12,3 +12,6 @@ CREATE TABLE `disputedsolution` (
   FOREIGN KEY (`expertID`) REFERENCES `expert` (`expertId`) ON DELETE CASCADE,
   FOREIGN KEY (`termID`) REFERENCES `confusingterm` (`termId`) ON DELETE CASCADE
 ) ENGINE='InnoDB';
+
+ALTER TABLE `disputedsolution`
+ADD `type` tinyint NOT NULL DEFAULT '1' COMMENT '1-quality, 2-structure' AFTER `comment`;

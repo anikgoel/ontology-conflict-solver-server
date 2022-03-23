@@ -17,8 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $taxa   = $_POST['taxa'];
     $newOrExisting = $_POST['newOrExisting'];
     $comment = $_POST['comment'];
+    $type = $_POST['type'];
 
-    $resultSubmitDecision = $db->submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $sentence, $taxa, $comment);
+    $resultSubmitDecision = $db->submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $sentence, $taxa, $comment, $type);
 
     if ($resultSubmitDecision == 1) {
 

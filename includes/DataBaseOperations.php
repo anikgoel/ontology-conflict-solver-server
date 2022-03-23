@@ -878,6 +878,17 @@
             return $stmt->get_result()->fetch_assoc();
         }
 
+        public function countSolvedDisputedConflicts($termId){
+            $stmt = $this->con->prepare("
+                SELECT COUNT(expertId)
+                FROM disputedsolution
+                WHERE termId = ?
+            ;");
+            $stmt->bind_param("s",$termId);
+            $stmt->execute();
+            return $stmt->get_result()->fetch_assoc();
+        }
+
         public function getAddTermSolutionByTermId($termId) {
             $stmt = $this->con->prepare("
                 SELECT expert.expertId as expertId, 
@@ -892,6 +903,17 @@
                         comment
                 FROM addtermsolution, expert
                 WHERE termId = ? and expert.expertId = addtermsolution.expertId
+            ");
+            $stmt->bind_param("i", $termId);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+
+        public function getDisputedSolutionByTermId($termId) {
+            $stmt = $this->con->prepare("
+                SELECT *
+                FROM disputedsolution
+                WHERE termId = ?
             ");
             $stmt->bind_param("i", $termId);
             $stmt->execute();
@@ -1426,10 +1448,14 @@
                 confusingterm.data as data,
                 confusingterm.status as status,
                 disputedsolution.expertID,
-                sentence.sentence
+                sentence.sentence,
+                author.firstname,
+                definition.definition
             FROM confusingterm
             LEFT JOIN disputedsolution ON confusingterm.termID = disputedsolution.termID
             LEFT JOIN sentence ON confusingterm.termID = sentence.termID
+            LEFT JOIN definition ON confusingterm.termID = definition.termID
+            INNER JOIN author ON confusingterm.authorId = author.authorId
             WHERE confusingterm.type='disputedDeprecation'                    
             ORDER BY term ASC
             ;");
@@ -1437,14 +1463,14 @@
             return $stmt->get_result();
         }
 
-        public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment){
+        public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type){
             $stmt = $this->con->prepare("
                 INSERT INTO `disputedsolution` 
-                (id, createdAt, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment) 
+                (id, createdAt, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment, type) 
                 VALUES
                 (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ? );
             ");
-            $stmt->bind_param('iissssss',$expertId, $termId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment);
+            $stmt->bind_param('iissssss',$expertId, $termId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type);
 
             if($stmt->execute()){
                 return 1;
