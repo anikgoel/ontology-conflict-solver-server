@@ -1457,7 +1457,8 @@
             LEFT JOIN sentence ON confusingterm.termID = sentence.termID
             LEFT JOIN definition ON confusingterm.termID = definition.termID
             INNER JOIN author ON confusingterm.authorId = author.authorId
-            WHERE confusingterm.type='disputedDeprecation'                    
+            WHERE confusingterm.type='disputedDeprecation' and
+            status != 'solved' and status != 'declined'                    
             ORDER BY term ASC
             ;");
             $stmt->execute();
