@@ -27,3 +27,13 @@ ADD `createdAt` datetime NULL ON UPDATE CURRENT_TIMESTAMP;
 
 ALTER TABLE `addtermsynonyms`
 ADD `createdAt` datetime NULL ON UPDATE CURRENT_TIMESTAMP;
+
+CREATE TABLE `resolutions` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `termId` int(11) NOT NULL,
+  `url` text NOT NULL,
+  `data` text NOT NULL,
+  `response` text NOT NULL,
+  `createdAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (`termId`) REFERENCES `confusingterm` (`termId`)
+) ENGINE='InnoDB';
