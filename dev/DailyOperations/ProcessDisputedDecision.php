@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $comment = $_POST['comment'];
     $type = $_POST['type'];
 
+    $db->deleteDisputedDeprecationDecision($termId, $expertId);
+
     $resultSubmitDecision = $db->submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $sentence, $taxa, $comment, $type, $newOrExisting);
 
     if ($resultSubmitDecision == 1) {

@@ -1386,6 +1386,15 @@
             $stmt->execute();
         }
 
+        public function deleteDisputedDeprecationDecision($termId, $expertId) {
+            $stmt = $this->con->prepare("
+                DELETE FROM disputedsolution
+                WHERE termId = ? and expertId = ?
+            ");
+            $stmt->bind_param("ii", $termId, $expertId);
+            $stmt->execute();
+        }
+
         public function deleteCurrentDecisions($termId, $expertId) {
             $stmt = $this->con->prepare("
                 DELETE FROM categorysolution
