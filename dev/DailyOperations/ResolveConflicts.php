@@ -84,6 +84,8 @@ require_once '../../includes/DataBaseOperations.php';
                         echo ("<br/>");
                         curl_close($ch);
 
+                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                         echo("/Save api<br/>");
                         $ch = curl_init();
                         $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -100,6 +102,8 @@ require_once '../../includes/DataBaseOperations.php';
                         echo($result);
                         echo ("<br/>");
                         curl_close($ch);
+
+                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
                         $db->markTermDeclined($termId);
                     } else {
@@ -246,6 +250,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo("<br/>");
                                         curl_close($ch);
 
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                         echo("/Save api<br/>");
                                         $ch = curl_init();
                                         $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -262,6 +268,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo($result);
                                         echo ("<br/>");
                                         curl_close($ch);
+
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                     }
                                 } else {
                                     for ($j = 0; $j < count($origOptions); $j ++) {
@@ -360,6 +368,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo($result);
                                         echo("<br/>");
                                         curl_close($ch);
+
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
         
                                         echo("/Save api<br/>");
                                         $ch = curl_init();
@@ -377,6 +387,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo($result);
                                         echo ("<br/>");
                                         curl_close($ch);
+
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                     }
                                 }
                             }
@@ -420,6 +432,8 @@ require_once '../../includes/DataBaseOperations.php';
                                     echo("<br/>");
                                     curl_close($ch);
 
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                     echo("/Save api<br/>");
                                     $ch = curl_init();
                                     $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -436,6 +450,8 @@ require_once '../../includes/DataBaseOperations.php';
                                     echo($result);
                                     echo ("<br/>");
                                     curl_close($ch);
+
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                 }
                             }
                             if ($countDeclined['COUNT(expertId)'] > 0) {
@@ -527,6 +543,8 @@ require_once '../../includes/DataBaseOperations.php';
                             echo ("<br/>");
                             curl_close($ch);
 
+                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                             echo("/Save api<br/>");
                             $ch = curl_init();
                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -542,6 +560,8 @@ require_once '../../includes/DataBaseOperations.php';
                             echo( curl_exec($ch));
                             echo ("<br/>");
                             curl_close($ch);
+
+                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                         }
                         echo("mark this term solved<br/>");
                         $db->markTermSolved($termId);
@@ -605,6 +625,8 @@ require_once '../../includes/DataBaseOperations.php';
                             echo ("<br/>");
                             curl_close($ch);
 
+                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                             echo("/Save api<br/>");
                             $ch = curl_init();
                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -620,6 +642,8 @@ require_once '../../includes/DataBaseOperations.php';
                             echo( curl_exec($ch));
                             echo ("<br/>");
                             curl_close($ch);
+
+                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                         }
                         echo("mark this term tough<br/>");
                         $db->markTermTough($termId);
@@ -682,6 +706,8 @@ require_once '../../includes/DataBaseOperations.php';
                         echo ("<br/>");
                         curl_close($ch);
 
+                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                         echo("/Save api<br/>");
                         $ch = curl_init();
                         $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -698,6 +724,8 @@ require_once '../../includes/DataBaseOperations.php';
                         echo($result);
                         echo ("<br/>");
                         curl_close($ch);
+
+                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
                         $db->markTermDeclined($termId);
                     } else {
@@ -791,6 +819,8 @@ require_once '../../includes/DataBaseOperations.php';
                                     echo ("<br/>");
                                     curl_close($ch);
 
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                     echo("/Save api<br/>");
                                     $ch = curl_init();
                                     $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -806,6 +836,8 @@ require_once '../../includes/DataBaseOperations.php';
                                     echo( curl_exec($ch));
                                     echo ("<br/>");
                                     curl_close($ch);
+
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                 }
                             }
 
@@ -857,6 +889,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo("<br/>");
                                         curl_close($ch);
 
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                         echo("/Save api<br/>");
                                         $ch = curl_init();
                                         $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -873,6 +907,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo($result);
                                         echo ("<br/>");
                                         curl_close($ch);
+
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                     }
                                 }
                             } else {
@@ -953,6 +989,8 @@ require_once '../../includes/DataBaseOperations.php';
                         echo ("<br/>");
                         curl_close($ch);
 
+                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                         echo("/Save api<br/>");
                         $ch = curl_init();
                         $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -969,6 +1007,8 @@ require_once '../../includes/DataBaseOperations.php';
                         echo($result);
                         echo ("<br/>");
                         curl_close($ch);
+
+                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
                         $db->markTermDeclined($termId);
                     } else {
@@ -1114,6 +1154,8 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo ("<br/>");
                                         curl_close($ch);
 
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                         echo("/Save api<br/>");
                                         $ch = curl_init();
                                         $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -1130,6 +1172,9 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo($result);
                                         echo ("<br/>");
                                         curl_close($ch);
+
+                                        $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                         break;
                                     }
                                 }
@@ -1388,6 +1433,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo ("<br/>");
                                             curl_close($ch);
 
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                             echo("/Save api<br/>");
                                             $ch = curl_init();
                                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -1404,6 +1451,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo($result);
                                             echo ("<br/>");
                                             curl_close($ch);
+
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
                                             for ($k = 0; $k < count($addTermSolutions); $k ++) {
                                                 if ($addTermSolutions[$k]['type'] == 'Structure') {
@@ -1443,6 +1492,8 @@ require_once '../../includes/DataBaseOperations.php';
                                                             echo ($result);
                                                             echo ("<br/>");
                                                             curl_close($ch);
+
+                                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
             
                                                             echo("/Save api<br/>");
                                                             $ch = curl_init();
@@ -1460,6 +1511,8 @@ require_once '../../includes/DataBaseOperations.php';
                                                             echo($result);
                                                             echo ("<br/>");
                                                             curl_close($ch);
+
+                                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                                         }
                                                     }
                                                 }
@@ -1581,6 +1634,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo ("<br/>");
                                             curl_close($ch);
 
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                             echo("/Save api<br/>");
                                             $ch = curl_init();
                                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -1597,6 +1652,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo($result);
                                             echo ("<br/>");
                                             curl_close($ch);
+
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                         }
                                     }
                                     if ($flgStructure == 0) {
@@ -1714,6 +1771,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo ("<br/>");
                                             curl_close($ch);
 
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                             echo("/Save api<br/>");
                                             $ch = curl_init();
                                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -1730,6 +1789,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo($result);
                                             echo ("<br/>");
                                             curl_close($ch);
+
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                         }
                                     }
                                     if ($flgStructure == 0) {
@@ -1847,6 +1908,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo ("<br/>");
                                             curl_close($ch);
 
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                             echo("/Save api<br/>");
                                             $ch = curl_init();
                                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -1863,6 +1926,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo($result);
                                             echo ("<br/>");
                                             curl_close($ch);
+
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                         }
                                     }
                                     if ($flgStructure == 0) {
@@ -1980,6 +2045,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo ("<br/>");
                                             curl_close($ch);
 
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                             echo("/Save api<br/>");
                                             $ch = curl_init();
                                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -1996,6 +2063,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo($result);
                                             echo ("<br/>");
                                             curl_close($ch);
+
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                         }
                                     }
                                     if ($flgStructure == 0) {
@@ -2113,6 +2182,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo ("<br/>");
                                             curl_close($ch);
 
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                             echo("/Save api<br/>");
                                             $ch = curl_init();
                                             $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -2129,6 +2200,8 @@ require_once '../../includes/DataBaseOperations.php';
                                             echo($result);
                                             echo ("<br/>");
                                             curl_close($ch);
+
+                                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                         }
                                     }
                                     if ($flgStructure == 0) {
@@ -2187,6 +2260,8 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo("<br/>");
                                 curl_close($ch);
 
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                 echo("/Save api<br/>");
                                 $ch = curl_init();
                                 $url = "http://shark.sbs.arizona.edu:8080/save";
@@ -2203,6 +2278,8 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo($result);
                                 echo ("<br/>");
                                 curl_close($ch);
+
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                             }
                         }
                         if ($termSolved == 1) {
@@ -2321,6 +2398,8 @@ require_once '../../includes/DataBaseOperations.php';
                             echo($result);
                             echo ("<br/>");
                             curl_close($ch);
+
+                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                         }
                         if (count($strongOptions) > 1) {
                             for ($i = 0; $i < count($strongOptions) - 1; $i ++) {
@@ -2375,6 +2454,8 @@ require_once '../../includes/DataBaseOperations.php';
                                     echo($result);
                                     echo ("<br/>");
                                     curl_close($ch);
+
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                                 }
                             }
                         }
@@ -2481,6 +2562,8 @@ require_once '../../includes/DataBaseOperations.php';
                             echo($result);
                             echo ("<br/>");
                             curl_close($ch);
+
+                            $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
                         }
                         echo ("this term is solved<br/>");
                         $db->markTermSolved($termId);
