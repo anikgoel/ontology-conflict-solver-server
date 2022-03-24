@@ -2570,6 +2570,8 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo ("<br/>");
                                 curl_close($ch);
 
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                 /** Second API call */
 
                                 $ch = curl_init();
@@ -2591,6 +2593,8 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo ($result);
                                 echo ("<br/>");
                                 curl_close($ch);
+
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
                                 /** Third API call */
 
@@ -2614,6 +2618,8 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo ($result);
                                 echo ("<br/>");
                                 curl_close($ch);
+
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
                                 $db->markTermSolved($termId);
                             } else {
@@ -2663,6 +2669,8 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo ("<br/>");
                                 curl_close($ch);
 
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                 /** Second API call */
 
                                 $ch = curl_init();
@@ -2685,6 +2693,9 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo ($result);
                                 echo ("<br/>");
                                 curl_close($ch);
+
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                 $db->markTermSolved($termId);
                             } else {
                                 echo ("superclass not matching for all<br/>");

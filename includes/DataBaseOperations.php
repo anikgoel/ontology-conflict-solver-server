@@ -1489,5 +1489,20 @@
             return 2;
         }
 
+        public function addDataToResolutions($termId, $url, $data, $response){
+            $stmt = $this->con->prepare("
+                INSERT INTO `resolutions` 
+                (id, createdAt, termID, url, data, response) 
+                VALUES
+                (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?);
+            ");
+            $stmt->bind_param('isss', $termId, $url, $data, $response);
+
+            if($stmt->execute()){
+                return 1;
+            }
+            return 2;
+        }
+
     }
 ?>
