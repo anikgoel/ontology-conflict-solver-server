@@ -1457,7 +1457,7 @@
                 confusingterm.term as term,
                 confusingterm.data as data,
                 confusingterm.status as status,
-                disputedsolution.expertID,
+                disputedsolution.*,
                 sentence.sentence,
                 author.firstname,
                 definition.definition

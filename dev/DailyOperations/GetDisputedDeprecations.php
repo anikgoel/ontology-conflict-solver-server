@@ -25,8 +25,33 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
     $disputedDeprecations[$task['termId']]['newDefinition'] = $task['definition'];
     if ($expertId == $task['expertID']) {
         $disputedDeprecations[$task['termId']]['solutionGiven'] = 1;
+
+        $disputedDeprecations[$task['termId']]['userSolution'] = [
+            'newTerm' => $task['newTerm'],
+            'newDefinition' => $task['newDefinition'],
+            'superclass' => $task['superclass'],
+            'exampleSentence' => $task['exampleSentence'],
+            'taxa' => $task['taxa'],
+            'comment' => $task['comment'],
+            'type' => $task['type'],
+            'newOrExisting' => $task['newOrExisting']
+        ];
+
     } elseif(!isset($disputedDeprecations[$task['termId']]['solutionGiven'])) {
         $disputedDeprecations[$task['termId']]['solutionGiven'] = 0;
+    } 
+    
+    if ($expertId != $task['expertID'] && $task['type'] != NULL){
+        $disputedDeprecations[$task['termId']]['otherSolution'][] = [
+            'newTerm' => $task['newTerm'],
+            'newDefinition' => $task['newDefinition'],
+            'superclass' => $task['superclass'],
+            'exampleSentence' => $task['exampleSentence'],
+            'taxa' => $task['taxa'],
+            'comment' => $task['comment'],
+            'type' => $task['type'],
+            'newOrExisting' => $task['newOrExisting']
+        ];
     }
 }
 ksort($disputedDeprecations);
