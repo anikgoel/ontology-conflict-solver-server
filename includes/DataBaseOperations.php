@@ -1460,9 +1460,11 @@
                 disputedsolution.*,
                 sentence.sentence,
                 author.firstname,
-                definition.definition
+                definition.definition,
+                expert.username as solutionUsername
             FROM confusingterm
             LEFT JOIN disputedsolution ON confusingterm.termID = disputedsolution.termID
+            LEFT JOIN expert ON disputedsolution.expertID = expert.expertId
             LEFT JOIN sentence ON confusingterm.termID = sentence.termID
             LEFT JOIN definition ON confusingterm.termID = definition.termID
             INNER JOIN author ON confusingterm.authorId = author.authorId
