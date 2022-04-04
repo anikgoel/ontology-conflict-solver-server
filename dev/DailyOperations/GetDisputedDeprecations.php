@@ -79,16 +79,20 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
     if ($expertId != $task['expertID'] && $task['type'] != NULL) {
 
         if ($task['type'] == 1) {
-            if (isset($disputedDeprecations[$task['termId']]['qualitySuperclass'])) {
-                $disputedDeprecations[$task['termId']]['qualitySuperclass'] .= "; " . $qualityArrayData[$task['superclass']];
-            } else {
-                $disputedDeprecations[$task['termId']]['qualitySuperclass'] = $qualityArrayData[$task['superclass']];
+            if (isset($qualityArrayData[$task['superclass']])) {
+                if (isset($disputedDeprecations[$task['termId']]['qualitySuperclass'])) {
+                    $disputedDeprecations[$task['termId']]['qualitySuperclass'] .= "; " . $qualityArrayData[$task['superclass']];
+                } else {
+                    $disputedDeprecations[$task['termId']]['qualitySuperclass'] = $qualityArrayData[$task['superclass']];
+                }
             }
         } else {
-            if (isset($disputedDeprecations[$task['termId']]['structureSuperclass'])) {
-                $disputedDeprecations[$task['termId']]['structureSuperclass'] .= "; " . $structureArrayData[$task['superclass']];
-            } else {
-                $disputedDeprecations[$task['termId']]['structureSuperclass'] = $structureArrayData[$task['superclass']];
+            if (isset($structureArrayData[$task['superclass']])) {
+                if (isset($disputedDeprecations[$task['termId']]['structureSuperclass'])) {
+                    $disputedDeprecations[$task['termId']]['structureSuperclass'] .= "; " . $structureArrayData[$task['superclass']];
+                } else {
+                    $disputedDeprecations[$task['termId']]['structureSuperclass'] = $structureArrayData[$task['superclass']];
+                }
             }
         }
 
@@ -106,7 +110,7 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
     }
 }
 ksort($disputedDeprecations);
-echo json_encode(array_values($disputedDeprecations),JSON_UNESCAPED_SLASHES);
+echo json_encode(array_values($disputedDeprecations), JSON_UNESCAPED_SLASHES);
 
 // print_r($disputedDeprecations);
 
