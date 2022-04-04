@@ -106,7 +106,7 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
             'comment' => $task['comment'],
             'type' => $task['type'],
             'newOrExisting' => $task['newOrExisting'],
-            'userName' => $task['solutionUsername'],
+            'username' => $task['solutionUsername'],
         ];
     }
 }
