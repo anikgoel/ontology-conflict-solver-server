@@ -1,7 +1,7 @@
 <?php
 require_once '../../includes/DataBaseOperations.php';
 
-echo '<pre>';
+// echo '<pre>';
 
 $structureLink = "http://shark.sbs.arizona.edu:8080/carex/getSubclasses?baseIri=http://biosemantics.arizona.edu/ontologies/carex&term=anatomical%20structure";
 $qualityLink = "http://shark.sbs.arizona.edu:8080/carex/getSubclasses?baseIri=http://biosemantics.arizona.edu/ontologies/carex&term=quality";
