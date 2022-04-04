@@ -99,15 +99,15 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
 
                 if ($task['newOrExisting'] == 1) {
                     if (isset($disputedDeprecations[$task['termId']]['structureSuperclassNew'])) {
-                        $disputedDeprecations[$task['termId']]['structureSuperclassNew'] .= "; " . $qualityArrayData[$task['superclass']];
+                        $disputedDeprecations[$task['termId']]['structureSuperclassNew'] .= "; " . $structureArrayData[$task['superclass']];
                     } else {
-                        $disputedDeprecations[$task['termId']]['structureSuperclassNew'] = $qualityArrayData[$task['superclass']];
+                        $disputedDeprecations[$task['termId']]['structureSuperclassNew'] = $structureArrayData[$task['superclass']];
                     }
                 } else {
                     if (isset($disputedDeprecations[$task['termId']]['structureSuperclassExisting'])) {
-                        $disputedDeprecations[$task['termId']]['structureSuperclassExisting'] .= "; " . $qualityArrayData[$task['superclass']];
+                        $disputedDeprecations[$task['termId']]['structureSuperclassExisting'] .= "; " . $structureArrayData[$task['superclass']];
                     } else {
-                        $disputedDeprecations[$task['termId']]['structureSuperclassExisting'] = $qualityArrayData[$task['superclass']];
+                        $disputedDeprecations[$task['termId']]['structureSuperclassExisting'] = $structureArrayData[$task['superclass']];
                     }
                 }
             }
