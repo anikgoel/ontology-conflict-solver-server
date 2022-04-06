@@ -340,7 +340,9 @@ require_once '../../includes/DataBaseOperations.php';
 /**
  * Disputed Deprecations fetching into the database
  */
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "http://shark.sbs.arizona.edu:8080/dispute/all");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $disputedResponse = curl_exec($ch);
         $disputedDeprecations = json_decode($disputedResponse);
         foreach($disputedDeprecations as $deprecation){
