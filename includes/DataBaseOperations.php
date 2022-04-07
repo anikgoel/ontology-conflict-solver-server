@@ -1533,5 +1533,17 @@
                 return '2';
             }    
         }
+
+        public function getClassesData($type)
+        {
+            $stmt = $this->con->prepare("
+                SELECT *
+                FROM classes 
+                WHERE type = ?
+            ");
+            $stmt->bind_param("i", $type);
+            $stmt->execute();  
+            return $stmt->get_result(); 
+        }
     }
 ?>

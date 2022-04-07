@@ -1,19 +1,18 @@
 <?php
 require_once '../../includes/DataBaseOperations.php';
 
-// echo '<pre>';
 
-$structureLink = "http://shark.sbs.arizona.edu:8080/carex/getSubclasses?baseIri=http://biosemantics.arizona.edu/ontologies/carex&term=anatomical%20structure";
-$qualityLink = "http://shark.sbs.arizona.edu:8080/carex/getSubclasses?baseIri=http://biosemantics.arizona.edu/ontologies/carex&term=quality";
-
-function getClasses($url)
+function getClasses($type)
 {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($ch);
-    curl_close($ch);
-    return json_decode($response);
+    $db = new DataBaseOperations();
+
+    $data = $db->getClassesData($type);
+	if(mysqli_num_rows($data) > 0 ){
+		while ($row = $data->fetch_assoc()) {
+			$result = $row["data"];
+		}
+	}
+    return json_decode($result);
 }
 
 function getClassesArray($classes, &$arrayData)
@@ -26,13 +25,11 @@ function getClassesArray($classes, &$arrayData)
     }
 }
 
-$classes = getClasses($qualityLink);
-
+$classes = getClasses('0');
 $qualityArrayData[$classes->data->details[0]->IRI] = $classes->text;
 getClassesArray($classes->children, $qualityArrayData);
 
-$classes = getClasses($structureLink);
-
+$classes = getClasses('1');
 $structureArrayData[$classes->data->details[0]->IRI] = $classes->text;
 getClassesArray($classes->children, $structureArrayData);
 

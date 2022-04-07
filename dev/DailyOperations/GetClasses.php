@@ -21,5 +21,4 @@ require_once '../../includes/DataBaseOperations.php';
 
 ?>
 
-<!-- string(7) "quality" string(20) "anatomical structure" -->
 
