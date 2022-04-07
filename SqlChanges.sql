@@ -37,3 +37,13 @@ CREATE TABLE `resolutions` (
   `createdAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (`termId`) REFERENCES `confusingterm` (`termId`)
 ) ENGINE='InnoDB';
+
+CREATE TABLE `classes` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `type` int NOT NULL COMMENT 'quality = 0, structure = 1',
+  `data` varchar(255) NOT NULL,
+  `created_at` timestamp NULL
+);
+
+ALTER TABLE `classes`
+CHANGE `data` `data` longtext COLLATE 'latin1_swedish_ci' NOT NULL AFTER `type`;

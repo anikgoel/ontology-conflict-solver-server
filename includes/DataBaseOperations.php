@@ -1506,5 +1506,32 @@
             return 2;
         }
 
+        public function isClassExist($type){
+            $stmt = $this->con->prepare("
+                SELECT ID 
+                FROM classes 
+                WHERE type = ?
+            ");
+            $stmt->bind_param("i", $type);
+            $stmt->execute(); 
+            $stmt->store_result(); 
+            return $stmt->num_rows > 0; 
+        }
+
+        public function addDataToClasses($type, $data)
+        {
+            if($this->isClassExist($type)){
+                $stmt = $this->con->prepare("UPDATE `classes` SET data = ? WHERE type = ?");
+                $stmt->bind_param("si",$data,$type);
+            }else{
+                $stmt = $this->con->prepare("INSERT INTO `classes` (id, type, data, created_at) VALUES(NULL, ?, ?, '".date("Y-m-d H:i:s")."'); ");
+                $stmt->bind_param('is', $type, $data);
+            }
+            if($stmt->execute()){
+                return '1';
+            }else{
+                return '2';
+            }    
+        }
     }
 ?>
