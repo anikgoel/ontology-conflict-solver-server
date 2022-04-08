@@ -1110,7 +1110,7 @@
 
         public function insertTermToConfusing($iri, $term, $data, $type, $authorId) {
             if(!$this->isTermExist($iri, $type)) {
-                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`, `createdAt`, `IRI`,`term`,`data`,`type`,`authorId`) VALUES (NULL,'".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?);");
+                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`, `IRI`,`term`,`data`,`type`,`authorId`) VALUES (NULL, ?, ?, ?, ?, ?);");
                 $stmt->bind_param("ssssi", $iri, $term, $data, $type, $authorId);
                 $stmt->execute();
                 $term = $this->getConfusingTermByIRI($iri, $type);
@@ -1121,7 +1121,7 @@
 
         public function insertEquivTermToConfusing($iri, $term, $data, $type, $authorId, $elucidations, $sentences, $definition) {
             if(!$this->isTermExist($iri, $type)) {
-                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`, `createdAt`,`IRI`,`term`,`data`,`type`,`authorId`, `elucidations`, `sentences`, `definition`) VALUES (NULL,'".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ?);");
+                $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`,`IRI`,`term`,`data`,`type`,`authorId`, `elucidations`, `sentences`, `definition`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?);");
                 $stmt->bind_param("ssssisss", $iri, $term, $data, $type, $authorId, $elucidations, $sentences, $definition);
                 $stmt->execute();
                 $term = $this->getConfusingTermByIRI($iri, $type);
@@ -1479,9 +1479,9 @@
         public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type, $newOrExisting){
             $stmt = $this->con->prepare("
                 INSERT INTO `disputedsolution` 
-                (id, createdAt, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment, type, newOrExisting) 
+                (id, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment, type, newOrExisting) 
                 VALUES
-                (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
+                (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
             ");
             $stmt->bind_param('iissssssii',$expertId, $termId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type, $newOrExisting);
 
@@ -1494,9 +1494,9 @@
         public function addDataToResolutions($termId, $url, $data, $response){
             $stmt = $this->con->prepare("
                 INSERT INTO `resolutions` 
-                (id, createdAt, termID, url, data, response) 
+                (id, termID, url, data, response) 
                 VALUES
-                (NULL, '".date("Y-m-d H:i:s")."', ?, ?, ?, ?);
+                (NULL, ?, ?, ?, ?);
             ");
             $stmt->bind_param('isss', $termId, $url, $data, $response);
 
