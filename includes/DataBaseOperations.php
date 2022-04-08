@@ -1524,7 +1524,7 @@
                 $stmt = $this->con->prepare("UPDATE `classes` SET data = ? WHERE type = ?");
                 $stmt->bind_param("si",$data,$type);
             }else{
-                $stmt = $this->con->prepare("INSERT INTO `classes` (id, type, data, created_at) VALUES(NULL, ?, ?, '".date("Y-m-d H:i:s")."'); ");
+                $stmt = $this->con->prepare("INSERT INTO `classes` (id, type, data) VALUES(NULL, ?, ?); ");
                 $stmt->bind_param('is', $type, $data);
             }
             if($stmt->execute()){
