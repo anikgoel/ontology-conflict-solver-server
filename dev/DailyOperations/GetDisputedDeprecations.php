@@ -5,14 +5,8 @@ require_once '../../includes/DataBaseOperations.php';
 function getClasses($type)
 {
     $db = new DataBaseOperations();
-
-    $data = $db->getClassesData($type);
-	if(mysqli_num_rows($data) > 0 ){
-		while ($row = $data->fetch_assoc()) {
-			$result = $row["data"];
-		}
-	}
-    return json_decode($result);
+    $data = $db->sendClassesData($type);
+    return json_decode($data);
 }
 
 function getClassesArray($classes, &$arrayData)

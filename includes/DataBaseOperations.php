@@ -1545,5 +1545,17 @@
             $stmt->execute();  
             return $stmt->get_result(); 
         }
+
+        public function sendClassesData($type)
+        {
+            $db = new DataBaseOperations();
+            $data = $db->getClassesData($type);
+            if(mysqli_num_rows($data) > 0 ){
+                while ($row = $data->fetch_assoc()) {
+                    $result = $row["data"];
+                }
+            }
+            return $result;
+        }
     }
 ?>
