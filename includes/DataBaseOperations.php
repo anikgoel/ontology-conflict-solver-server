@@ -177,7 +177,7 @@
 
             while( $termId = $results->fetch_assoc()) {
                 $stmt = $this->con->prepare("
-                    INSERT INTO `categorysolution` VALUES (NULL, ?, ?, 0, '', '', '')
+                    INSERT INTO `categorysolution` (id, expertId, termId, choice, writtenComment, voiceComment) VALUES (NULL, ?, ?, 0, '', '')
                 ");
                 $stmt->bind_param("ss", $expertId, $termId['termId']);
                 $stmt->execute();
@@ -473,7 +473,7 @@
             for( $i = 0 ; $i < count($sentenceIds) ; $i ++ ) {
                 if (!$this->isApproveExist($sentenceIds[$i], $definitionIds[$i], $expertId)) {
                     $stmt = $this->con->prepare("
-                        INSERT INTO synonymsolution
+                        INSERT INTO synonymsolution (id, sentenceId, definitionId, expertId, comment)
                         VALUES(NULL, ?, ?, ?, ?);
                     ");
                     $stmt->bind_param("ssss", $sentenceIds[$i], $definitionIds[$i], $expertId, $comment);
@@ -485,7 +485,7 @@
 
         public function addDefinition($termId, $expertId, $definition){
             $stmt = $this->con->prepare("
-                INSERT INTO definition
+                INSERT INTO definition (id, definition, termId, expertId)
                 VALUES(NULL, ?, ?, ?);
             ");
             $stmt->bind_param("sss",$definition, $termId, $expertId);
@@ -666,8 +666,8 @@
             $stmt->execute();
 
             $stmt = $this->con->prepare("
-                INSERT INTO addtermsolution
-                VALUES( NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '".date("Y-m-d H:i:s")."');
+                INSERT INTO addtermsolution (id, termId, expertId, type, subpart, superpart, alwaysHasPart, alwaysPartOf, maybePartOf, subclassOf, comment)
+                VALUES( NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             ;");
             $stmt->bind_param("ssssssssss", $termId, $expertId, $termType, $subpart, $superpart, $alwaysHasPart, $alwaysPartOf, $maybePartOf, $subclassOf, $comment);
             return $stmt->execute();
@@ -703,7 +703,7 @@
             $stmt->execute();
             
             $stmt = $this->con->prepare("
-                INSERT INTO declinedterm
+                INSERT INTO declinedterm (ID, termId, expertId, reason, alternativeTerm)
                 VALUES( NULL, ?, ?, ?, ?);
             ");
             $stmt->bind_param("iiss", $termId, $expertId, $reason, $alternativeTerm);
@@ -720,8 +720,8 @@
 
             for ($i = 0; $i < count($experts); $i ++) {
                 $stmt = $this->con->prepare("
-                    INSERT INTO addtermsynonyms
-                    VALUES( NULL, ?, ?, ?, '".date("Y-m-d H:i:s")."');
+                    INSERT INTO addtermsynonyms (id, termId, expertId, synonym)
+                    VALUES( NULL, ?, ?, ?);
                 ;");
                 $stmt->bind_param("sss", $termId, $experts[$i], $synonyms[$i]);
                 if (!$stmt->execute()) {
@@ -981,7 +981,7 @@
 
         public function submitDecision($termId, $expertId, $choice, $writtenComment, $voiceComment){
             $stmt = $this->con->prepare("
-                INSERT INTO `categorysolution` VALUES(NULL, ?, ?, ?, ?, ?);
+                INSERT INTO `categorysolution` (id, expertId, termId, choice, writtenComment, voiceComment) VALUES(NULL, ?, ?, ?, ?, ?);
             ");
             $stmt->bind_param("sssss", $expertId, $termId, $choice, $writtenComment, $voiceComment);
 
@@ -993,7 +993,7 @@
 
         public function submitExactDecision($termId, $expertId, $caseId, $selected, $reason){
             $stmt = $this->con->prepare("
-                INSERT INTO `exactcasesolution` VALUES(NULL, ?, ?, ?, ?, ?);
+                INSERT INTO `exactcasesolution` (id, expertId, termId, caseId, selected, reason) VALUES(NULL, ?, ?, ?, ?, ?);
             ");
             $stmt->bind_param("sssss", $expertId, $termId, $caseId, $selected, $reason);
 
