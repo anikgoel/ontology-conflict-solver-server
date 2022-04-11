@@ -539,7 +539,7 @@ require_once '../../includes/DataBaseOperations.php';
                             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                            echo( curl_exec($ch));
+                            $result = curl_exec($ch);
                             echo ("<br/>");
                             curl_close($ch);
 
@@ -557,7 +557,7 @@ require_once '../../includes/DataBaseOperations.php';
                             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                            echo( curl_exec($ch));
+                            $result = curl_exec($ch);
                             echo ("<br/>");
                             curl_close($ch);
 
@@ -621,7 +621,7 @@ require_once '../../includes/DataBaseOperations.php';
                             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                            echo( curl_exec($ch));
+                            $result = curl_exec($ch);
                             echo ("<br/>");
                             curl_close($ch);
 
@@ -639,7 +639,7 @@ require_once '../../includes/DataBaseOperations.php';
                             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                            echo( curl_exec($ch));
+                            $result = curl_exec($ch);
                             echo ("<br/>");
                             curl_close($ch);
 
@@ -815,7 +815,7 @@ require_once '../../includes/DataBaseOperations.php';
                                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                                    echo( curl_exec($ch));
+                                    $result = curl_exec($ch);
                                     echo ("<br/>");
                                     curl_close($ch);
 
@@ -833,7 +833,7 @@ require_once '../../includes/DataBaseOperations.php';
                                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                                    echo( curl_exec($ch));
+                                    $result = curl_exec($ch);
                                     echo ("<br/>");
                                     curl_close($ch);
 
