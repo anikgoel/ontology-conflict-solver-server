@@ -815,11 +815,11 @@ require_once '../../includes/DataBaseOperations.php';
                                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                                    $result = curl_exec($ch);
+                                    $curlResult = curl_exec($ch);
                                     echo ("<br/>");
                                     curl_close($ch);
 
-                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $curlResult);
 
                                     echo("/Save api<br/>");
                                     $ch = curl_init();
@@ -833,11 +833,11 @@ require_once '../../includes/DataBaseOperations.php';
                                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                                     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
-                                    $result = curl_exec($ch);
+                                    $curlResult = curl_exec($ch);
                                     echo ("<br/>");
                                     curl_close($ch);
 
-                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+                                    $db->addDataToResolutions($termId, $url, json_encode($fileds), $curlResult);
                                 }
                             }
 
