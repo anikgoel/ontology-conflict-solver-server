@@ -2686,9 +2686,9 @@ require_once '../../includes/DataBaseOperations.php';
                                 $fileds = array(
                                     "user"=>"", // empty
                                     "ontology"=>"carex", //static
-                                    "replaceTerms"=> "http://biosemantics.arizona.edu/ontologies/carex#$newTerm", // new_term will be agreed term
+                                    "replaceTerms"=> ["http://biosemantics.arizona.edu/ontologies/carex#$newTerm"], // new_term will be agreed term
                                     "depClassIRI"=> $termIRI, 
-                                    "decisionExperts"=> $decisionExperts, 
+                                    "decisionExperts"=> [$decisionExperts], 
                                     "decisionDate"=> $currentDate
 
                                 );
@@ -2761,9 +2761,9 @@ require_once '../../includes/DataBaseOperations.php';
                                 $fileds = array(
                                     "user"=>"", // empty
                                     "ontology"=>"carex", //static
-                                    "replaceTerms"=> $superClass, // term data from the dropdown
+                                    "replaceTerms"=> [$superClass], // term data from the dropdown
                                     "depClassIRI"=> $termIRI, 
-                                    "decisionExperts"=> $decisionExperts, 
+                                    "decisionExperts"=> [$decisionExperts], 
                                     "decisionDate"=> $currentDate
 
                                 );
