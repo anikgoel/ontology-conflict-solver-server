@@ -396,7 +396,7 @@ require_once '../../includes/DataBaseOperations.php';
                             $resComments = $db->getComments($termId);
                             while ($rowComment = $resComments->fetch_assoc()) {
                                 if ($rowComment['writtenComment'] != '') {
-                                    echo ("/comment api<br/>");
+                                    echo ("/resolverComment api<br/>");
                                     echo ("user: ''<br/>");
                                     echo ("ontology: 'carex'<br/>");
                                     echo ("comment: ");
@@ -413,7 +413,7 @@ require_once '../../includes/DataBaseOperations.php';
                                     echo ("<br/>");
 
                                     $ch = curl_init();
-                                    $url = "http://shark.sbs.arizona.edu:8080/comment";
+                                    $url = "http://shark.sbs.arizona.edu:8080/resolverComment";
                                     $fileds = array(
                                         "user" => "",
                                         "ontology" => "carex",
@@ -852,7 +852,7 @@ require_once '../../includes/DataBaseOperations.php';
                                 $resComments = $db->getApproveTermCommentsByTermId($termId);
                                 while ($rowComment = $resComments->fetch_assoc()) {
                                     if ($rowComment['comment'] != '') {
-                                        echo ("/comment api<br/>");
+                                        echo ("/resolverComment api<br/>");
                                         echo ("user: ''<br/>");
                                         echo ("ontology: 'carex'<br/>");
                                         echo ("comment: ");
@@ -870,7 +870,7 @@ require_once '../../includes/DataBaseOperations.php';
                                         echo ("<br/>");
 
                                         $ch = curl_init();
-                                        $url = "http://shark.sbs.arizona.edu:8080/comment";
+                                        $url = "http://shark.sbs.arizona.edu:8080/resolverComment";
                                         $fileds = array(
                                             "user" => "",
                                             "ontology" => "carex",
@@ -2224,7 +2224,7 @@ require_once '../../includes/DataBaseOperations.php';
                         $resComments = $db->getAddTermCommentsByTermId($termId);
                         while ($rowComment = $resComments->fetch_assoc()) {
                             if ($rowComment['comment'] != '') {
-                                echo ("/comment api<br/>");
+                                echo ("/resolverComment api<br/>");
                                 echo ("user: ''<br/>");
                                 echo ("ontology: 'carex'<br/>");
                                 echo ("comment: ");
@@ -2241,7 +2241,7 @@ require_once '../../includes/DataBaseOperations.php';
                                 echo ("<br/>");
 
                                 $ch = curl_init();
-                                $url = "http://shark.sbs.arizona.edu:8080/comment";
+                                $url = "http://shark.sbs.arizona.edu:8080/resolverComment";
                                 $fileds = array(
                                     "user" => "",
                                     "ontology" => "carex",
