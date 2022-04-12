@@ -96,6 +96,14 @@ while ($task = $disputedDeprecationsDb->fetch_assoc()) {
                     }
                 }
             }
+
+            //create term string
+            if(isset($disputedDeprecations[$task['termId']]['otherNewTerm'])){
+                $disputedDeprecations[$task['termId']]['otherNewTerm'] .= "; " . $task['newTerm'];
+            }else{
+                $disputedDeprecations[$task['termId']]['otherNewTerm'] = $task['newTerm'];
+            }
+
         } else {
             if (isset($structureArrayData[$task['superclass']])) {
 
