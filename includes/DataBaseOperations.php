@@ -972,9 +972,13 @@
                     SELECT DISTINCT termId
                     FROM declinedterm
                     WHERE expertId = ?
+                ) or termId in (
+                    SELECT DISTINCT termID as termId
+                    FROM disputedsolution
+                    WHERE expertID = ?
                 )
             ;");
-            $stmt->bind_param("sssss", $expertId, $expertId, $expertId, $expertId, $expertId);
+            $stmt->bind_param("ssssss", $expertId, $expertId, $expertId, $expertId, $expertId, $expertId);
             $stmt->execute();
             return $stmt->get_result()->fetch_assoc();
         }
