@@ -2704,6 +2704,27 @@ require_once '../../includes/DataBaseOperations.php';
 
                                 $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
 
+                                /** Fourth API call */
+
+                                echo("/Save api<br/>");
+                                $ch = curl_init();
+                                $url = "http://shark.sbs.arizona.edu:8080/save";
+                                $fileds = array(
+                                    "user" => "",
+                                    "ontology" => "carex",
+                                );
+                                curl_setopt($ch, CURLOPT_URL, $url);
+                                curl_setopt($ch, CURLOPT_POST, true);
+                                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                                $result = curl_exec($ch);
+                                echo($result);
+                                echo ("<br/>");
+                                curl_close($ch);
+
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
                                 $db->markTermSolved($termId);
                             } else {
                                 echo ("superclass and newTerm not matching for all<br/>");
@@ -2774,6 +2795,27 @@ require_once '../../includes/DataBaseOperations.php';
                                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
                                 $result = curl_exec($ch);
                                 echo ($result);
+                                echo ("<br/>");
+                                curl_close($ch);
+
+                                $db->addDataToResolutions($termId, $url, json_encode($fileds), $result);
+
+                                /** Third API call */
+
+                                echo("/Save api<br/>");
+                                $ch = curl_init();
+                                $url = "http://shark.sbs.arizona.edu:8080/save";
+                                $fileds = array(
+                                    "user" => "",
+                                    "ontology" => "carex",
+                                );
+                                curl_setopt($ch, CURLOPT_URL, $url);
+                                curl_setopt($ch, CURLOPT_POST, true);
+                                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fileds));
+                                $result = curl_exec($ch);
+                                echo($result);
                                 echo ("<br/>");
                                 curl_close($ch);
 
