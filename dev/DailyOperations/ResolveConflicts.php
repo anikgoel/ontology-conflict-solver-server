@@ -2619,12 +2619,24 @@ require_once '../../includes/DataBaseOperations.php';
                                     $decisionExperts .= "[".$solution['username']."]";
                                 }
                             }
+
+
+                            foreach($superClassIRICount as $key => $value){
+                                if($value/$newCount >= 0.6){
+                                    $superClass = $key;
+                                }
+                            }
+
+                            foreach($newTermCount as $key => $value){
+                                if($value/$newCount >= 0.6){
+                                    $newTerm = $key;
+                                }
+                            }
+
                             
-                            if (count($superClassIRICount) == 1 && count($newTermCount) == 1){
+                            if ($superClass != '' && $newTerm != ''){
                                 //Strong agreement on new, superclass and newTerm
 
-                                $superClass = array_keys($superClassIRICount)[0];
-                                $newTerm = array_keys($newTermCount)[0];
                                 /** First API call */
 
                                 $ch = curl_init();
@@ -2735,6 +2747,7 @@ require_once '../../includes/DataBaseOperations.php';
 
                             $superClassIRICount = [];
                             $decisionExperts = '';
+                            $superClass = '';
 
                             foreach($addTermSolutions as $solution){
                                 if ($solution['newOrExisting'] == 2) {
@@ -2747,7 +2760,13 @@ require_once '../../includes/DataBaseOperations.php';
                                 }
                             }
 
-                            if (count($superClassIRICount) == 1){
+                            foreach($superClassIRICount as $key => $value){
+                                if($value/$newCount >= 0.6){
+                                    $superClass = $key;
+                                }
+                            }
+
+                            if ($superClass != ''){
 
                                 $superClass = array_keys($superClassIRICount)[0];
 
