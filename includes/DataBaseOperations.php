@@ -22,6 +22,10 @@
         *****************************************************************************/
 
         public function createAuthor($username, $pass, $firstname, $lastname, $email){
+            $username  =trim($username);
+            $firstname = trim($firstname);
+            $lastname = trim($lastname);
+            $email = trim($email);
             
             if($this->isAuthorExist($username,$email)){
 
@@ -86,6 +90,11 @@
         *****************************************************************************/
 
     	public function createExpert($username, $pass, $firstname, $lastname, $email){
+            $username = trim($username);
+            $firstname = trim($firstname);
+            $lastname = trim($lastname);
+            $email = trim($email);
+
             if($this->isExpertExist($username,$email)){
                 return 0;
             }else{
@@ -469,6 +478,7 @@
         }
 
         public function setApproveData($expertId, $sentenceIds, $definitionIds, $comment) {
+            $comment = trim($comment);
 
             for( $i = 0 ; $i < count($sentenceIds) ; $i ++ ) {
                 if (!$this->isApproveExist($sentenceIds[$i], $definitionIds[$i], $expertId)) {
@@ -484,6 +494,7 @@
         }
 
         public function addDefinition($termId, $expertId, $definition){
+            $definition = trim($definition);
             $stmt = $this->con->prepare("
                 INSERT INTO definition (id, definition, termId, expertId)
                 VALUES(NULL, ?, ?, ?);
@@ -658,6 +669,15 @@
         }
         
         public function setAddTermSolution($termId, $expertId, $termType, $subpart, $superpart, $alwaysHasPart, $alwaysPartOf, $maybePartOf, $subclassOf, $comment) {
+            $termType = trim($termType);
+            $subpart = trim($subpart);
+            $superpart = trim($superpart);
+            $alwaysHasPart = trim($alwaysHasPart);
+            $alwaysPartOf = trim($alwaysPartOf);
+            $maybePartOf = trim($maybePartOf);
+            $subclassOf = trim($subclassOf);
+            $comment = trim($comment);
+            
             $stmt = $this->con->prepare("
                 DELETE FROM addtermsolution
                 WHERE termId = ? and expertId = ? 
@@ -674,6 +694,9 @@
         }
 
         public function declineTerm($termId, $expertId, $reason, $alternativeTerm) {
+            $reason = trim($reason);
+            $alternativeTerm = trim($alternativeTerm);
+
             $stmt = $this->con->prepare("
                 DELETE FROM categorysolution
                 WHERE termId = ? and expertId = ?
@@ -719,6 +742,7 @@
             $stmt->execute();
 
             for ($i = 0; $i < count($experts); $i ++) {
+                $synonyms[$i] = trim($synonyms[$i]);
                 $stmt = $this->con->prepare("
                     INSERT INTO addtermsynonyms (id, termId, expertId, synonym)
                     VALUES( NULL, ?, ?, ?);
@@ -984,6 +1008,10 @@
         }
 
         public function submitDecision($termId, $expertId, $choice, $writtenComment, $voiceComment){
+            $choice = trim($choice);
+            $writtenComment = trim($writtenComment);
+            $voiceComment = trim($voiceComment);
+            
             $stmt = $this->con->prepare("
                 INSERT INTO `categorysolution` (id, expertId, termId, choice, writtenComment, voiceComment) VALUES(NULL, ?, ?, ?, ?, ?);
             ");
@@ -996,6 +1024,8 @@
         }
 
         public function submitExactDecision($termId, $expertId, $caseId, $selected, $reason){
+            $reason = trim($reason);
+
             $stmt = $this->con->prepare("
                 INSERT INTO `exactcasesolution` (id, expertId, termId, caseId, selected, reason) VALUES(NULL, ?, ?, ?, ?, ?);
             ");
@@ -1150,6 +1180,9 @@
         }
 
         public function insertOption($iri, $option, $definition, $image) {
+            $option = trim($option);
+            $definition = trim($definition);
+
             if(!$this->isOptionExist($iri)) {
                 $stmt = $this->con->prepare("INSERT INTO `option_` (`optionId`,`IRI`,`option_`,`definition`,`image_link`) VALUES (NULL, ?, ?, ?, ?);");
                 $stmt->bind_param("ssss", $iri, $option, $definition, $image);
@@ -1166,18 +1199,24 @@
         }
 
         public function insertSentence($sentence, $termId) {
+            $sentence = trim($sentence);
+
             $stmt = $this->con->prepare("INSERT INTO `sentence` (`id`,`sentence`,`termId`) VALUES (NULL, ?, ?);");
             $stmt->bind_param("si", $sentence, $termId);
             $stmt->execute();
         }
 
         public function insertDefinition($definition, $termId) {
+            $definition = trim($definition);
+
             $stmt = $this->con->prepare("INSERT INTO `definition` (`id`,`definition`,`termId`,`expertId`) VALUES (NULL, ?, ?, NULL);");
             $stmt->bind_param("si", $definition, $termId);
             $stmt->execute();
         }
 
         public function getAuthorId($username) {
+            $username = trim($username);
+
             $email = str_replace(" ", ".", $username);
             $email .= "@email.arizona.edu";
             $pass = "aaaaaa";
@@ -1449,6 +1488,11 @@
         }
 
         public function insertExactCase($termId, $iri, $elucidations, $sentences, $definition, $label, $termCreator) {
+            $sentences = trim($sentences);
+            $definition = trim($definition);
+            $label = trim($label);
+            $termCreator = trim($termCreator);
+
             $stmt = $this->con->prepare("INSERT INTO `exactcases` (`id`,`termId`,`iri`,`elucidations`,`sentences`,`definition`,`label`,`termCreator`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);");
             $stmt->bind_param("issssss", $termId, $iri, $elucidations, $sentences, $definition, $label, $termCreator);
             $stmt->execute();
@@ -1481,6 +1525,12 @@
         }
 
         public function submitDisputeDecision($termId, $expertId, $newTerm, $newDefinition, $superclass, $exampleSentence, $taxa, $comment, $type, $newOrExisting){
+            $newTerm = trim($newTerm);
+            $newDefinition = trim($newDefinition);
+            $exampleSentence  =trim($exampleSentence);
+            $taxa = trim($taxa);
+            $comment = trim($comment);
+
             $stmt = $this->con->prepare("
                 INSERT INTO `disputedsolution` 
                 (id, expertID, termID, newTerm, newDefinition, superclass, exampleSentence, taxa, comment, type, newOrExisting) 
