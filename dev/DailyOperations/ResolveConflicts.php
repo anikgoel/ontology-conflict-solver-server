@@ -2644,7 +2644,7 @@ require_once '../../includes/DataBaseOperations.php';
                                 $fileds = array(
                                     "user" => "", //always empty
                                     "ontology" => "carex", //static
-                                    "term" => $term, 
+                                    "term" => $newTerm, 
                                     "superclassIRI" => $superClass, // to be fetched from DB as per agreement
                                     "definition" => $definition, // concat all the definition added by reviewers by ;
                                     "elucidation" => "", // always empty
@@ -2761,7 +2761,7 @@ require_once '../../includes/DataBaseOperations.php';
                             }
 
                             foreach($superClassIRICount as $key => $value){
-                                if($value/$newCount >= 0.6){
+                                if($value/$existingCount >= 0.6){
                                     $superClass = $key;
                                 }
                             }
