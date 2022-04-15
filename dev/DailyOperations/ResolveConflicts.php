@@ -2644,7 +2644,7 @@ require_once '../../includes/DataBaseOperations.php';
                                 $fileds = array(
                                     "user" => "", //always empty
                                     "ontology" => "carex", //static
-                                    "term" => $newTerm, 
+                                    "term" => strtolower($newTerm), 
                                     "superclassIRI" => $superClass, // to be fetched from DB as per agreement
                                     "definition" => $definition, // concat all the definition added by reviewers by ;
                                     "elucidation" => "", // always empty
@@ -2675,7 +2675,7 @@ require_once '../../includes/DataBaseOperations.php';
                                     "user"=>"", //empty
                                     "ontology"=>"carex",  //static
                                     "term"=>$term, 
-                                    "classIRI"=> "http://biosemantics.arizona.edu/ontologies/carex#$newTerm", // new_term will be agreed term
+                                    "classIRI"=> "http://biosemantics.arizona.edu/ontologies/carex#".strtolower($newTerm), // new_term will be agreed term
                                     "decisionExperts"=>$decisionExperts, 
                                     "decisionDate"=> $currentDate 
                                 );
@@ -2698,7 +2698,7 @@ require_once '../../includes/DataBaseOperations.php';
                                 $fileds = array(
                                     "user"=>"", // empty
                                     "ontology"=>"carex", //static
-                                    "replaceTerms"=> ["http://biosemantics.arizona.edu/ontologies/carex#$newTerm"], // new_term will be agreed term
+                                    "replaceTerms"=> ["http://biosemantics.arizona.edu/ontologies/carex#".strtolower($newTerm)], // new_term will be agreed term
                                     "depClassIRI"=> $termIRI, 
                                     "decisionExperts"=> [$decisionExperts], 
                                     "decisionDate"=> $currentDate
