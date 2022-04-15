@@ -1146,7 +1146,10 @@
             if(!$this->isTermExist($iri, $type)) {
                 $stmt = $this->con->prepare("INSERT INTO `confusingterm` (`termId`, `IRI`,`term`,`data`,`type`,`authorId`) VALUES (NULL, ?, ?, ?, ?, ?);");
                 $stmt->bind_param("ssssi", $iri, $term, $data, $type, $authorId);
-                $stmt->execute();
+                if(!$stmt->execute()){
+                    echo $stmt->error;
+                    echo '<br/>';
+                }
                 $term = $this->getConfusingTermByIRI($iri, $type);
                 return $term['termId'];
             }
@@ -1186,7 +1189,10 @@
             if(!$this->isOptionExist($iri)) {
                 $stmt = $this->con->prepare("INSERT INTO `option_` (`optionId`,`IRI`,`option_`,`definition`,`image_link`) VALUES (NULL, ?, ?, ?, ?);");
                 $stmt->bind_param("ssss", $iri, $option, $definition, $image);
-                $stmt->execute();
+                if(!$stmt->execute()){
+                    echo $stmt->error;
+                    echo '<br/>';
+                }
             }
             $option = $this->getOptionByIRI($iri);
             return $option['optionId'];

@@ -149,3 +149,9 @@ ADD `createdAt` datetime NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `synonymsolution`
 ADD `updatedAt` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+ALTER TABLE `option_`
+CHANGE `definition` `definition` text COLLATE 'latin1_swedish_ci' NULL AFTER `option_`;
+
+ALTER TABLE `confusingterm`
+CHANGE `term` `term` varchar(255) COLLATE 'latin1_swedish_ci' NULL AFTER `IRI`;
