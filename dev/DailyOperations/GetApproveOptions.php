@@ -18,7 +18,7 @@ $curComment = "";
             $id   = $row['id'];
             $sentence   = $row['sentence'];
             $sentences[] = array("id"=>$id,
-                            "sentence"=>$sentence);
+                            "sentence"=>utf8_encode($sentence));
         }
 
         $result = $db->getDefinitions($_GET['termId'],  $_GET['expertId']);
@@ -28,7 +28,7 @@ $curComment = "";
             $id   = $row['id'];
             $definition   = $row['definition'];
             $definitions[] = array("id"=>$id,
-                            "definition"=>$definition,
+                            "definition"=>utf8_encode($definition),
                             "expertId"=>$row['expertId']);
         }
         
@@ -47,11 +47,11 @@ $curComment = "";
             if ($row['comment'] && $row['comment'] != '') {
                 if ($row['expertId'] != $_GET['expertId']) {
                     $comments[] = array(
-                        "comment"=>$row['comment'],
+                        "comment"=>utf8_encode($row['comment']),
                         "username"=>$row['username']
                     );
                 } else {
-                    $curComment = $row['comment'];
+                    $curComment = utf8_encode($row['comment']);
                 }
             }
         }
