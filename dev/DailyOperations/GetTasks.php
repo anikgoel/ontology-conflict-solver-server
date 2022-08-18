@@ -27,7 +27,7 @@ $equivTermData = array();
             $type       = 'category';
             $status     = $task['status'];
 
-            $categoryData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $categoryData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $categoryTasks = $db->getUnSolvedCategoryTask($expertId);
@@ -43,7 +43,7 @@ $equivTermData = array();
             $type       = 'category';
             $status     = $task['status'];
 
-            $categoryData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $categoryData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $approveTasks = $db->getApproveTask($expertId);
@@ -59,7 +59,7 @@ $equivTermData = array();
             $type       = 'synonym';
             $status     = $task['status'];
 
-            $approveData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "sCount" => $task['sentenceCount'], "status"=>$status);
+            $approveData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "sCount" => $task['sentenceCount'], "status"=>$status);
         }
 
         $addTermTasks = $db->getAddTermTasks($expertId);
@@ -75,7 +75,7 @@ $equivTermData = array();
             $type       = 'addTerm';
             $status     = $task['status'];
 
-            $addTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $addTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $exactTasks = $db->getSolvedExactTasks($expertId);
@@ -90,7 +90,7 @@ $equivTermData = array();
             $type       = 'exact';
             $status     = $task['status'];
 
-            $exactTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $exactTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $exactTasks = $db->getUnsolvedExactTask($expertId);
@@ -105,7 +105,7 @@ $equivTermData = array();
             $type       = 'exact';
             $status     = $task['status'];
 
-            $exactTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $exactTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $equivTasks = $db->getSolvedEquivTasks($expertId);
@@ -120,7 +120,7 @@ $equivTermData = array();
             $type       = 'equiv';
             $status     = $task['status'];
 
-            $equivTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $equivTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $equivTasks = $db->getUnsolvedEquivTask($expertId);
@@ -135,7 +135,7 @@ $equivTermData = array();
             $type       = 'equiv';
             $status     = $task['status'];
 
-            $equivTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>$data,"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
+            $equivTermData[] = array("termId"=>$termId, "term"=>$term, "type"=>$type, "data"=>utf8_encode($data),"isSolved"=>$isSolved, "count"=>$count, "status"=>$status);
         }
 
         $response = array_merge($categoryData, $approveData, $addTermData, $exactTermData, $equivTermData);
