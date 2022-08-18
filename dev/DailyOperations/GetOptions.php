@@ -16,7 +16,7 @@ $response = array();
             $image_link   = $row['image_link'];
             $count        = $db->getCategorySolutionCount($_GET['ID'], $option_, $_GET['expertId'])['count'];
             $data[] = array("option_"=>$option_, 
-                            "definition"=>$definition,
+                            "definition"=>utf8_encode($definition),
                             "image_link"=>$image_link,
                             "count"=>$count
                         );
@@ -82,7 +82,7 @@ $response = array();
             }
             $count = $db->getCategorySolutionCount($_GET['ID'], $option_, $_GET['expertId'])['count'];
             $data[] = array("option_"=>$option_, 
-                            "definition"=>$optionDefinition,
+                            "definition"=>utf8_encode($optionDefinition),
                             "image_link"=>$optionImageLink,
                             "count"=>$count
                         );
@@ -95,11 +95,11 @@ $response = array();
             if ($row['writtenComment'] && $row['writtenComment'] != '') {
                 if ($row['expertId'] != $_GET['expertId']) {
                     $comments[] = array(
-                        "comment"=>$row['writtenComment'],
+                        "comment"=>utf8_encode($row['writtenComment']),
                         "username"=>$row['username']
                     );
                 } else {
-                    $curComment = $row['writtenComment'];
+                    $curComment = utf8_encode($row['writtenComment']);
                 }
             }
         }
