@@ -9,14 +9,17 @@ require_once '../../includes/DataBaseOperations.php';
 
         if ($db->setAddTermSolution($_GET['termId'], $_GET['expertId'], $_GET['termType'], $_GET['subPartString'], $_GET['superPartString'], $_GET['alwaysHasPartString'], $_GET['alwaysPartOfString'], $_GET['maybePartOfString'], $_GET['subclassOf'],$_GET['comment'])) {
             if ($db->addSynonyms($_GET['termId'], $_GET['expertId'], $_GET['experts'], $_GET['synonyms'])){
-                return ['error' => false];
+                //return ['error' => false];
+                echo json_encode(['error' => false]);
             }
             else {
-                return ['error' => true, 'message' => 'falure 2'];
+                //return ['error' => true, 'message' => 'falure 2'];
+                echo json_encode(['error' => true, 'message' => 'falure 2']);
             }
         }
         else {
-            return ['error' => true, 'message' => 'falure 1'];
+            //return ['error' => true, 'message' => 'falure 1'];
+            echo json_encode(['error' => true, 'message' => 'falure 2']);
         }
     }
 ?>
